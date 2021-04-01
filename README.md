@@ -5,6 +5,26 @@ if Body used to declare body param, the key will be necessary in the JSON reques
 if not, then there is no key.
 if multiple bodies are present, then they will be wrapped, and keys will need to be present
 
+## data types
+
+### basic 
+
+int 
+float 
+str
+bool
+
+### advanced
+
+UUID
+datetime.datetime
+datetime.date
+datetime.time
+datetime.timedelta
+frozenset - same as set
+bytes
+Decimal - similar to float
+
 ### defs
 
 asgi server - asynchronous server gateway interface
