@@ -5,7 +5,7 @@ from datetime import datetime, time, timedelta
 
 from enum import Enum
 
-from fastapi import FastAPI, Query, Body, Path
+from fastapi import FastAPI, Query, Body, Path, Depends
 from pydantic import BaseModel, Field
 
 app = FastAPI()  # load up fx
@@ -68,6 +68,9 @@ class PartialB(BaseModel):
     name: str
     descraption: str
 
+# returns dict
+async def common_parameters(q: Optional[str] = None, skip: int = 0, limit: int = 100):
+    return {"q": q, "skip": skip, "limit": limit}
 
 @app.get("/getMerged", status_code=222, response_model=Union[PartialB, PartialA])
 async def read_item():
@@ -78,6 +81,9 @@ async def read_item():
 def read_root():  # controller for get /
     return {"Hello": "World"}  # dict
 
+@app.get("/DITest")
+async def dependency_injection(commons: dict = Depends(common_parameters)): # query params injected can also pass in class
+    return commons
 
 @app.put("/items/{item_id}")
 # both param and body and query param too
