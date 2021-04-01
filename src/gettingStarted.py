@@ -8,7 +8,7 @@ from enum import Enum
 from fastapi import FastAPI, Query, Body, Path, Depends, HTTPException
 from pydantic import BaseModel, Field
 
-app = FastAPI()  # load up fx
+app = FastAPI()  # load up fx - can also use dependencies = [ list of dependencies ]
 
 class Image(BaseModel):
     url: str

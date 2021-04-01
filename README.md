@@ -5,6 +5,18 @@ if Body used to declare body param, the key will be necessary in the JSON reques
 if not, then there is no key.
 if multiple bodies are present, then they will be wrapped, and keys will need to be present
 
+### python async await
+method declared with async returns coroutine and requires asyncio.run to run 
+
+3 types of awaitables
+coroutine 
+task - run concurrently
+future - eventual result of async operation, normally not used
+
+asyncio.createTask(asyncfunc) to create coroutine 
+
+generators: use yield - iterables that get values 
+
 ## data types
 
 ### basic 
