@@ -1,5 +1,8 @@
 from typing import Optional, List
 
+from uuid import UUID
+from datetime import datetime, time, timedelta
+
 from enum import Enum
 
 from fastapi import FastAPI, Query, Body, Path
@@ -41,6 +44,17 @@ class User(BaseModel):
     username: str
     full_name: Optional[str] = None
 
+class UserIn(BaseModel):
+    username: str
+    password: str
+    email: str
+    full_name: Optional[str] = None
+
+class UserOut(BaseModel):
+    username: str
+    email: str
+    full_name: Optional[str] = None
+
 
 @app.get("/")  # annotations like spring boot
 def read_root():  # controller for get /
@@ -52,6 +66,25 @@ def read_root():  # controller for get /
 def update_item(*, item_id: int, item: Item, q: Optional[str] = None, user: User): # multiple bodies
     return {"item_id": item_id, **item.dict()}  # double star unpacks dict
 
+@app.put("/itemsWithDate/{item_id}")
+async def read_items(
+    item_id: UUID,
+    start_datetime: Optional[datetime] = Body(None),
+    end_datetime: Optional[datetime] = Body(None),
+    repeat_at: Optional[time] = Body(None),
+    process_after: Optional[timedelta] = Body(None),
+):
+    start_process = start_datetime + process_after
+    duration = end_datetime - start_process
+    return {
+        "item_id": item_id,
+        "start_datetime": start_datetime,
+        "end_datetime": end_datetime,
+        "repeat_at": repeat_at,
+        "process_after": process_after,
+        "start_process": start_process,
+        "duration": duration,
+    }
 
 @app.get("/items/{item_id}")  # example of accepting param
 # example of receiving query string
@@ -115,3 +148,7 @@ async def create_item(item: Item):  # request body
         price_with_tax = item.price + item.tax
         item_dict.update({"price_with_tax": price_with_tax})
         return item_dict
+
+@app.post("/userWithResponseModel/", response_model=UserOut, response_model_exclude_unset=True)
+async def create_user(user: UserIn):
+    return user
