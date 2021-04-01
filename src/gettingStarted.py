@@ -5,7 +5,7 @@ from datetime import datetime, time, timedelta
 
 from enum import Enum
 
-from fastapi import FastAPI, Query, Body, Path, Depends
+from fastapi import FastAPI, Query, Body, Path, Depends, HTTPException
 from pydantic import BaseModel, Field
 
 app = FastAPI()  # load up fx
@@ -84,6 +84,10 @@ def read_root():  # controller for get /
 @app.get("/DITest")
 async def dependency_injection(commons: dict = Depends(common_parameters)): # query params injected can also pass in class
     return commons
+
+@app.get("/alwaysEx")
+async def always_exception(): # query params injected can also pass in class
+    raise HTTPException(status_code=400, detail="nothing u can do")
 
 @app.put("/items/{item_id}")
 # both param and body and query param too
