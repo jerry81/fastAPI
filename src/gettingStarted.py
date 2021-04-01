@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Union
 
 from uuid import UUID
 from datetime import datetime, time, timedelta
@@ -44,16 +44,34 @@ class User(BaseModel):
     username: str
     full_name: Optional[str] = None
 
-class UserIn(BaseModel):
+class UserBase(BaseModel):
     username: str
-    password: str
     email: str
     full_name: Optional[str] = None
 
-class UserOut(BaseModel):
-    username: str
-    email: str
-    full_name: Optional[str] = None
+
+class UserIn(UserBase):
+    password: str # stending base
+
+
+class UserOut(UserBase): 
+    pass # null statement, no-op
+
+
+class UserInDB(UserBase):
+    hashed_password: str
+
+class PartialA(BaseModel):
+    name: str
+
+class PartialB(BaseModel):
+    name: str
+    descraption: str
+
+
+@app.get("/getMerged", status_code=222, response_model=Union[PartialB, PartialA])
+async def read_item():
+    return {"name": "blah", "descraption": "blah"}
 
 
 @app.get("/")  # annotations like spring boot
