@@ -1,18 +1,35 @@
-from typing import Optional
+from typing import Optional, List
 
 from enum import Enum
 
-from fastapi import FastAPI, Query
-from pydantic import BaseModel
+from fastapi import FastAPI, Query, Body, Path
+from pydantic import BaseModel, Field
 
 app = FastAPI()  # load up fx
 
+class Image(BaseModel):
+    url: str
+    name: str
 
 class Item(BaseModel):
     name: str
-    description: Optional[str] = None
-    price: float
+    description: Optional[str] = Field( # field validator
+       None, title="The description of the item", max_length=300
+    )
+    price: float = Field(..., gt=0, description="The price must be greater than zero")
     tax: Optional[float] = None
+    tags: List[str] = []
+    image: Optional[Image] = None # subModel as type
+
+    class Config: # note that this is part of the Class, schema declaration, aids in docs
+        schema_extra = {
+            "example": {
+                "name": "Foo",
+                "description": "A very nice Item",
+                "price": 35.4,
+                "tax": 3.2,
+            }
+        }
 
 
 class ModelName(str, Enum):
@@ -32,7 +49,7 @@ def read_root():  # controller for get /
 
 @app.put("/items/{item_id}")
 # both param and body and query param too
-def update_item(item_id: int, item: Item, q: Optional[str] = None, user: User): # multiple bodies
+def update_item(*, item_id: int, item: Item, q: Optional[str] = None, user: User): # multiple bodies
     return {"item_id": item_id, **item.dict()}  # double star unpacks dict
 
 
@@ -55,10 +72,10 @@ async def read_items(q: Optional[str] = Query(None, min_length=3, max_length=50,
 @app.get("/itemsTricks/")
 # param validation (greater than or equal to 1)
 async def read_items(
-        *, 
+        *,  # without this, you cannot put non-defaults after params with defaults
         item_id: int = Path(..., title="the ID", ge=1, le=1000), 
         q: str,
-        size: float = Query(... gt=0, lt=10.5)): # float example
+        size: float = Query(..., gt=0, lt=10.5)): # float example
     results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
     if q:
         results.update({"q": q})
