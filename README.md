@@ -17,6 +17,7 @@ asyncio.createTask(asyncfunc) to create coroutine
 
 generators: use yield - iterables that get values 
 
+
 ## data types
 
 ### basic 
@@ -36,6 +37,31 @@ datetime.timedelta
 frozenset - same as set
 bytes
 Decimal - similar to float
+
+### sqlAlchemy
+
+SQL toolkit and ORM
+
+SQL vs NoSQL note: sql db are better when size and performance start to matter
+noSql less like tables and rows when abstraction starts to matter
+
+known for its ORM - optional layer
+
+very open source
+
+data mapper pattern - a mapper layer between the objects and the db ensures independence between the layers
+
+2 comonents: Core and ORM 
+
+uses queue system for insert/update/delete operations, flushes them as batch - fowler's "unit of work" pattern
+
+### pydantic 
+
+provides data validation using python type annotations
+
+provides BaseModel
+
+used by FastAPI 
 
 ### defs
 
@@ -60,3 +86,6 @@ item_id: int - can use classes
 
 pydantic - for data validation
 
+检索： look up
+
+Hibernate - java's leading ORM 
