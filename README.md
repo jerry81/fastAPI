@@ -114,6 +114,16 @@ op.drop_table()
 
 alembic downgrade goes backwards in time (rollback)
 
+### other packages
+
+databases - async db support for python - uses sqlAlchemy expression language 
+
+loguru - logging for python 
+
+inflect - natural language processing (pluralizing words)
+
+cryptography - self explanatory, required by sha256_password
+
 ### python typing Generic
 
 example of generic classes - collection classes like Array 
@@ -125,6 +135,29 @@ use Stack[Int]
 ### uvicorn 
 
 fast ASGI server inplementation 
+
+### testing 
+
+can use pytest directly with FastAPI
+
+client = TestClient(app)
+
+then
+response = client.get('/') # calls the endpoint /
+
+assert on response
+assert response.json() == ...
+
+then run the test with 
+
+pytest 
+
+### pytest
+
+provides assert
+
+will run all files test_*.py or *_test.py
+standard test discovery rules
 
 ### defs
 
