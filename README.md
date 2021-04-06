@@ -17,6 +17,30 @@ asyncio.createTask(asyncfunc) to create coroutine
 
 generators: use yield - iterables that get values 
 
+### APIRouter
+
+from fastapi import APIRouter
+
+router = APIRouter()
+
+usage: 
+
+@router.get("/users", tags=["users"])
+async def read_users():
+    return [{"username":"Rick" }, {"username":"Morty"}]
+
+organize file structure as 
+app 
+    __init__.py # allows for importing code from one file to another
+    main.py
+    dependencies.py
+    routers
+        __init__.py # allows for importing code from one file to another
+        items.py
+        users.py
+    internal
+        __init__.py # allows for importing code from one file to another
+        admin.py
 
 ## data types
 
@@ -55,7 +79,6 @@ data mapper pattern - a mapper layer between the objects and the db ensures inde
 
 uses queue system for insert/update/delete operations, flushes them as batch - fowler's "unit of work" pattern
 
-
 ### pymysql
 
 client library for Python MySQL
@@ -91,6 +114,18 @@ op.drop_table()
 
 alembic downgrade goes backwards in time (rollback)
 
+### python typing Generic
+
+example of generic classes - collection classes like Array 
+
+Syntax - use square brackets to wrap the type 
+declare: Generic[T]
+use Stack[Int]
+
+### uvicorn 
+
+fast ASGI server inplementation 
+
 ### defs
 
 asgi server - asynchronous server gateway interface
@@ -117,3 +152,11 @@ pydantic - for data validation
 检索： look up
 
 Hibernate - java's leading ORM 
+
+python relative import
+from ..dependencies import get_token_header
+
+python self - refers to current instance of this class 
+used to access variables in class
+
+jsonable_encoder - provided by fastAPI to convert data type to JSON dict/list
