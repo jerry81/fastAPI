@@ -55,6 +55,17 @@ data mapper pattern - a mapper layer between the objects and the db ensures inde
 
 uses queue system for insert/update/delete operations, flushes them as batch - fowler's "unit of work" pattern
 
+
+### pymysql
+
+client library for Python MySQL
+
+requires Cpython, pypy, mysql or mariaDB
+
+provides SQL stateents in python code,
+
+connection, connection.cursor()
+
 ### pydantic 
 
 provides data validation using python type annotations
@@ -62,6 +73,23 @@ provides data validation using python type annotations
 provides BaseModel
 
 used by FastAPI 
+
+### alembic 
+
+part of sqlalchemy 
+
+migration tool 
+
+create, manage, invoke change management scripts for relational db 
+
+has CLI 
+
+versions/ folder has migration scripts
+
+op object op.create_table()
+op.drop_table()
+
+alembic downgrade goes backwards in time (rollback)
 
 ### defs
 
