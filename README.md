@@ -124,6 +124,12 @@ inflect - natural language processing (pluralizing words)
 
 cryptography - self explanatory, required by sha256_password
 
+pytest-asyncio - utils for testing async code
+
+httpx - provides async request client for testing endpoints
+
+asgi-lifespan - allow testing async apps without asgi server
+
 ### python typing Generic
 
 example of generic classes - collection classes like Array 
@@ -152,12 +158,30 @@ then run the test with
 
 pytest 
 
+from blog entry, <a href="https://www.jeffastor.com/blog/testing-fastapi-endpoints-with-docker-and-pytest">Testing Fastapi endpoints with docker and pytest (1/13/21)</a>
+use a combo of pytest, pytest-asyncio, httpx, asgi-lifespan
+
+0.  in db config, fork the DB URL to test if environment is testing
+1.  apply migrations at beginning and end of testing session using pytest.fixture
+    a.  set environment to "TESTING"
+    b.  alembic.command.upgrade
+    c.  yield
+    d.  alembic.command.downgrade
+    e.  set scope to "session" so that the db persists between tests, otherwise fresh db for each test
+2.  create application for testing
+3.  provide db where required
+4.  create client fixtture
+
 ### pytest
 
 provides assert
 
 will run all files test_*.py or *_test.py
 standard test discovery rules
+
+### pip install from requirements file
+
+python -m pip install -r -requirements file-
 
 ### troubleshooting
 
