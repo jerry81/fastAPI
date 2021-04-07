@@ -7,8 +7,20 @@ from enum import Enum
 
 from fastapi import FastAPI, Query, Body, Path, Depends, HTTPException
 from pydantic import BaseModel, Field
+from sqlalchemy.orm import Session 
+from .database import SessionLocal, engine
+from . import crud, models, schemas
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()  # load up fx - can also use dependencies = [ list of dependencies ]
+
+def get_db(): # dependency
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 class Image(BaseModel):
     url: str
@@ -75,6 +87,14 @@ async def common_parameters(q: Optional[str] = None, skip: int = 0, limit: int =
 @app.get("/getMerged", status_code=222, response_model=Union[PartialB, PartialA])
 async def read_item():
     return {"name": "blah", "descraption": "blah"}
+
+@app.get("db/players", status_code=222)
+async def get_players(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
+    return crud.get_players(db=db, skip=skip, limit=limit)
+
+@app.post("db/player", status_code=201)
+async def create_player(player: schemas.PlayerCreate, db: Session = Depends(get_db)):
+    return crud.create_player(db=db, player=player)
 
 
 @app.get("/")  # annotations like spring boot
