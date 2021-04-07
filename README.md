@@ -159,6 +159,12 @@ provides assert
 will run all files test_*.py or *_test.py
 standard test discovery rules
 
+### troubleshooting
+
+when running pytest, ImportError while importing test module
+cause: no __init__.py file present in directory with test
+solution: add an empty __init__.py file to the directories with tests
+
 ### defs
 
 asgi server - asynchronous server gateway interface

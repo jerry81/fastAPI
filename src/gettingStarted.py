@@ -92,7 +92,7 @@ async def always_exception(): # query params injected can also pass in class
 @app.put("/items/{item_id}")
 # both param and body and query param too
 def update_item(*, item_id: int, item: Item, q: Optional[str] = None, user: User): # multiple bodies
-    return {"item_id": item_id, **item.dict()}  # double star unpacks dict
+    return {"item_id": item_id, **item.dict()}  # double star unpacks dict 
 
 @app.put("/itemsWithDate/{item_id}")
 async def read_items(
