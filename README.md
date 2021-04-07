@@ -183,6 +183,12 @@ standard test discovery rules
 
 python -m pip install -r -requirements file-
 
+### naming conventions
+
+single underscore - private 
+
+double underscore aka name mangling - distinguish from global scope - class vars
+
 ### troubleshooting
 
 when running pytest, ImportError while importing test module
