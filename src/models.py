@@ -21,4 +21,4 @@ class Team(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(20), unique=True, index=True)
     city = Column(String(20))
-    players = relationship("Player", back_populates="teams")
+    players = relationship("Player", back_populates="team")

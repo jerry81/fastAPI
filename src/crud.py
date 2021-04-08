@@ -14,7 +14,9 @@ def get_player_by_name(db: Session, name: str):
 
 
 def get_players(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(Player).offset(skip).limit(limit).all()
+    players = db.query(Player).offset(skip).limit(limit).all()
+    print("players is ", players)
+    return players
 
 
 def create_player(db: Session, player: PlayerCreate):

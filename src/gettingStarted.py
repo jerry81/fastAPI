@@ -13,6 +13,7 @@ from database import SessionLocal, engine, Base
 from crud import get_players, create_player
 from schemas import PlayerCreate, Player
 from fastapi.responses import JSONResponse, Response
+from models import Player
 
 Base.metadata.create_all(bind=engine)
 
@@ -94,11 +95,14 @@ async def read_item():
     return {"name": "blah", "descraption": "blah"}
 
 @app.get("/db/players", status_code=222)
-async def get_players(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
+def get_playerz(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
+   # player = db.query(Player).all()
+   # print('player is ', player)
+   # return player
     return get_players(db=db, skip=skip, limit=limit)
 
 @app.post("/db/player", status_code=201)
-def create_player(player:  PlayerCreate, db: Session = Depends(get_db)):
+def create_playerz(player:  PlayerCreate, db: Session = Depends(get_db)):
     newplayer = create_player(db=db, player=player)
     print("new player", newplayer)
     return JSONResponse(jsonable_encoder(newplayer))
