@@ -49,6 +49,43 @@ at top of controller router=APIRouter()
 
 @router.get("/") ...
 
+### app lifecycle events
+
+app.add_event_handler("startup/shutdown", handler(app))
+
+### custom middleware 
+
+define a function
+def logger(app: FastAPI):
+    @app.middleware("http")
+    async def logger_request(request: Request, call_next) -> Response: # -> Response is return value
+        logger.info(...)
+        response = await call_next(request)
+        return response
+
+### bcrypt
+
+for hashing and checking passwords
+
+salt - a random value added to input of hash to gen unique hashes 
+
+bcrypt.hashpw(pw, salt)
+
+bcrypt.checkpw(password, hashed) -> bool
+
+### PyJWT
+
+pip install pyjwt
+import jwt
+encoded_jwt = jwt.encode({"some": "payload"}, "secret", algorithm="HS256")
+jwt.decode(encoded_jwt, "secret", algorithms["HS256"])
+
+
+### app setup
+
+app.add_middleware(middleware_object) # for example, starlette.middleware.cors.CORSMiddleware
+app.include_router(api_router, prefix=API_PREFIX) # from app.routers.api import router as api_router
+
 
 ## data types
 
