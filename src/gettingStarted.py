@@ -90,13 +90,13 @@ async def common_parameters(q: Optional[str] = None, skip: int = 0, limit: int =
 async def read_item():
     return {"name": "blah", "descraption": "blah"}
 
-@app.get("db/players", status_code=222)
+@app.get("/db/players", status_code=222)
 async def get_players(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
     return get_players(db=db, skip=skip, limit=limit)
 
-@app.post("db/player", status_code=201)
+@app.post("/db/player", status_code=201)
 async def create_player(player:  PlayerCreate, db: Session = Depends(get_db)):
-    return crud.create_player(db=db, player=player)
+    return create_player(db=db, player=player)
 
 
 @app.get("/")  # annotations like spring boot
