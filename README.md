@@ -130,6 +130,8 @@ httpx - provides async request client for testing endpoints
 
 asgi-lifespan - allow testing async apps without asgi server
 
+starlette - complete asgi fx OR support toolkit - config module is used in project
+
 ### python typing Generic
 
 example of generic classes - collection classes like Array 
@@ -194,6 +196,18 @@ double underscore aka name mangling - distinguish from global scope - class vars
 when running pytest, ImportError while importing test module
 cause: no __init__.py file present in directory with test
 solution: add an empty __init__.py file to the directories with tests
+
+could not import added modules
+cause: using old image
+solution: run docker-compose up -d --build
+
+ImportError: attempted relative import with no known parent package
+cause: 
+solution: changed to frome -filename- import fn
+
+VARCHAR requires a length on dialect mysql
+cause: mysql requirement
+solution: src_address = Column(String(16), index=True)
 
 ### defs
 

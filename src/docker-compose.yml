@@ -12,3 +12,24 @@ services:
       - ./.env
     ports: 
       - 8000:8000
+    networks:
+      - common
+    depends_on:
+      - db
+
+  db: 
+    image: mysql:8.0.23
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: gs
+      MYSQL_USER: gs
+      MYSQL_PASSWORD: gs
+    networks:
+      - common
+networks:
+  common:
+volumes:
+  db_data:
