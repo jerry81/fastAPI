@@ -42,6 +42,14 @@ app
         __init__.py # allows for importing code from one file to another
         admin.py
 
+router.include_router(another_router) # for composing routers
+app.include_router(api_router)
+
+at top of controller router=APIRouter()
+
+@router.get("/") ...
+
+
 ## data types
 
 ### basic 
@@ -113,6 +121,30 @@ op object op.create_table()
 op.drop_table()
 
 alembic downgrade goes backwards in time (rollback)
+
+usage:
+from alembic import op
+import sqlalchemy as sa
+
+alembic has an .ini file with configurations
+env.py file - run when alembic migration tool is invoked 
+
+install using alembic~=1.5.8
+
+scripts:
+alembic
+alembic upgrade head
+alembic downgrade
+alembic history
+
+w.r.t. running app
+alembic upgrade head
+then 
+uvicorn --host...
+
+methods
+op.create_index(idx_name, table, col)
+op.create_table(table_name, sqlalchemy_column1, sqlalchemy_column2, etc...)
 
 ### other packages
 
