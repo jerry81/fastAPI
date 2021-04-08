@@ -23,11 +23,25 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
+with args - 
+router = APIRouter(
+    prefix="/admin",
+    dependencies=[Depends(cat.get_current_user)],
+    responses={404: {"description": "Not found"}}
+    route_class=customized_route
+)
+
+dependencies adds the dependency to every endpoint defined in this router
+
+route_class allows customized routes
+
 usage: 
 
 @router.get("/users", tags=["users"])
 async def read_users():
     return [{"username":"Rick" }, {"username":"Morty"}]
+
+    
 
 organize file structure as 
 app 
@@ -79,7 +93,7 @@ pip install pyjwt
 import jwt
 encoded_jwt = jwt.encode({"some": "payload"}, "secret", algorithm="HS256")
 jwt.decode(encoded_jwt, "secret", algorithms["HS256"])
-
+exp included in the body with a timestamp is the expiration time claim 
 
 ### app setup
 
