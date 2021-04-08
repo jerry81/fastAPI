@@ -20,7 +20,7 @@ def get_players(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_player(db: Session, player: PlayerCreate):
-    db_player = Player(name=encoded.name, height=encoded.height, active=encoded.active, position=encoded.position)
+    db_player = Player(name=player.name, height=player.height, active=player.active, position=player.position)
     print("i am here", db_player)            
     db.add(db_player)
     db.commit()

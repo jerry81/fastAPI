@@ -214,6 +214,8 @@ cause: in async controller function, not using await
 solution: add await
 
  RecursionError: maximum recursion depth exceeded in comparison
+ caust: my error with naming the controller function the same as the function being called in the crud file
+ solution: resolve the scoping issue 
 
 ### defs
 
