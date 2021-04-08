@@ -209,6 +209,12 @@ VARCHAR requires a length on dialect mysql
 cause: mysql requirement
 solution: src_address = Column(String(16), index=True)
 
+ValueError: [TypeError("'coroutine' object is not iterable"), TypeError('vars() argument must have __dict__ attribute')]
+cause: in async controller function, not using await
+solution: add await
+
+ RecursionError: maximum recursion depth exceeded in comparison
+
 ### defs
 
 asgi server - asynchronous server gateway interface

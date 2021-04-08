@@ -25,7 +25,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: gs
-      MYSQL_USER: gs
+      MYSQL_USER: root
       MYSQL_PASSWORD: gs
     networks:
       - common

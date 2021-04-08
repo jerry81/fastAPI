@@ -6,14 +6,17 @@ from datetime import datetime, time, timedelta
 from enum import Enum
 
 from fastapi import FastAPI, Query, Body, Path, Depends, HTTPException
+from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session 
-from database import SessionLocal, engine
+from database import SessionLocal, engine, Base
 from crud import get_players, create_player
-from models import Base
-from schemas import PlayerCreate
+from schemas import PlayerCreate, Player
+from fastapi.responses import JSONResponse, Response
 
 Base.metadata.create_all(bind=engine)
+
+print('wired up ')
 
 app = FastAPI()  # load up fx - can also use dependencies = [ list of dependencies ]
 
@@ -95,8 +98,10 @@ async def get_players(db: Session = Depends(get_db), skip: int = 0, limit: int =
     return get_players(db=db, skip=skip, limit=limit)
 
 @app.post("/db/player", status_code=201)
-async def create_player(player:  PlayerCreate, db: Session = Depends(get_db)):
-    return create_player(db=db, player=player)
+def create_player(player:  PlayerCreate, db: Session = Depends(get_db)):
+    newplayer = create_player(db=db, player=player)
+    print("new player", newplayer)
+    return JSONResponse(jsonable_encoder(newplayer))
 
 
 @app.get("/")  # annotations like spring boot

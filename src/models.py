@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 
 from database import Base
 
+print('building on base')
 class Player(Base):
     __tablename__ = "players"
 

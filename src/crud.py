@@ -1,19 +1,25 @@
-from sqlalchemy.orm import Session 
+from sqlalchemy.orm import Session
+from fastapi.encoders import jsonable_encoder
 
 from models import Player, Team
 from schemas import TeamCreate, PlayerCreate
 
+
 def get_player(db: Session, player_id: int):
     return db.query(Player).filter(models.Player.id == player_id).first()
-    
+
+
 def get_player_by_name(db: Session, name: str):
     return db.query(Player).filter(models.Player.name == name).first()
+
 
 def get_players(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Player).offset(skip).limit(limit).all()
 
+
 def create_player(db: Session, player: PlayerCreate):
-    db_player = Player(name=player.name, height=player.height, active=player.active, position=player.position)
+    db_player = Player(name=encoded.name, height=encoded.height, active=encoded.active, position=encoded.position)
+    print("i am here", db_player)            
     db.add(db_player)
     db.commit()
     db.refresh(db_player)
