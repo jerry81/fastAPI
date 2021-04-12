@@ -300,6 +300,10 @@ solution: add await
  caust: my error with naming the controller function the same as the function being called in the crud file
  solution: resolve the scoping issue 
 
+old code being used
+cause: docker compose build must run again 
+solution: rerun docker-compose -d --build
+
 new database is not being used, old one still being used
 cause: docker compose using a cached volume
 solution: purge the volume and rebuild the container
