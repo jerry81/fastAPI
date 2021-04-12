@@ -300,6 +300,10 @@ solution: add await
  caust: my error with naming the controller function the same as the function being called in the crud file
  solution: resolve the scoping issue 
 
+new database is not being used, old one still being used
+cause: docker compose using a cached volume
+solution: purge the volume and rebuild the container
+
 ### defs
 
 asgi server - asynchronous server gateway interface

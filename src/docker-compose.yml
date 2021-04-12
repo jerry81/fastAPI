@@ -9,7 +9,7 @@ services:
       - ./:/gettingStarted/
     command: uvicorn gettingStarted:app --reload --workers 1 --host 0.0.0.0 --port 8000
     env_file: 
-      - ./.env
+      - ./.env.test
     ports: 
       - 8000:8000
     networks:
@@ -22,11 +22,13 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: gs
-      MYSQL_USER: root
-      MYSQL_PASSWORD: gs
+    env_file:
+      - ./.env.test
+    # environment:
+    #  MYSQL_ROOT_PASSWORD: password
+    #  MYSQL_DATABASE: gs
+    #  MYSQL_USER: root
+    #  MYSQL_PASSWORD: gs
     networks:
       - common
 networks:
