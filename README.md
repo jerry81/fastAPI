@@ -322,6 +322,10 @@ standard_init_linux.go:178: exec user process caused “exec format error”
 cause: bash was not set as the executor
 solution: add #!/bin/bash to the script
 
+alembic revision --autogenerate -m cannot locate revision 
+cause: the database has a different revision hash 
+solution: either remove the local database/volume or login to the db and drop the table
+
 ### defs
 
 asgi server - asynchronous server gateway interface
