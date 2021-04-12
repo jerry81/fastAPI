@@ -1,13 +1,13 @@
 version: '3.8'
 
 services:
-  server:
+  test:
     build:
       context: ./
       dockerfile: Dockerfile
     # volumes:
     #  - ./:/gettingStarted/
-    command: ./wait-for-it.sh db:3306 -- uvicorn gettingStarted:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    command: ./wait-for-it.sh dbtest:3306 -- uvicorn gettingStarted:app --reload --workers 1 --host 0.0.0.0 --port 8000
     env_file: 
       - ./.env.test
     ports: 
@@ -15,12 +15,12 @@ services:
     networks:
       - common
     depends_on:
-      - db
+      - dbtest
 
-  db: 
+  dbtest: 
     image: mysql:8.0.23
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data_test:/var/lib/mysql
     restart: always
     env_file:
       - ./.env.test
@@ -34,4 +34,4 @@ services:
 networks:
   common:
 volumes:
-  db_data:
+  db_data_test:

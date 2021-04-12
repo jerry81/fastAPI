@@ -356,3 +356,10 @@ python self - refers to current instance of this class
 used to access variables in class
 
 jsonable_encoder - provided by fastAPI to convert data type to JSON dict/list
+
+### instructions
+
+testing: cleans up docker and runs the test compose 
+``` console
+docker-compose -f docker-compose.test.yml down && docker-compose -f docker-compose.test.yml rm -v && docker-compose -f docker-compose.test.yml up -d --build && docker-compose -f docker-compose.test.yml up
+```

@@ -7,7 +7,9 @@ config = Config(".env")
 USERNAME = config('MYSQL_USER', cast=str)
 PSWD = config('MYSQL_PASSWORD', cast=str)
 DB = config('MYSQL_DATABASE', cast=str)
-DB_URL = f'mysql+pymysql://{USERNAME}:{PSWD}@db:3306/{DB}' # connect string to mysql
+print ('DB is ', DB)
+SERVICE_NAME = "db" if DB == "gs" else "dbtest"
+DB_URL = f'mysql+pymysql://{USERNAME}:{PSWD}@{SERVICE_NAME}:3306/{DB}' # connect string to mysql
 
 engine = create_engine(
     DB_URL, pool_pre_ping=True
