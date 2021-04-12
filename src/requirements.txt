@@ -6,3 +6,5 @@ SQLAlchemy~=1.4.4
 starlette~=0.13.2
 PyMySQL~=1.0.2
 cryptography~=3.4.7
+pytest~=6.2.3
+requests~=2.25.1

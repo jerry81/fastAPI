@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     # volumes:
     #  - ./:/gettingStarted/
-    command: ./wait-for-it.sh dbtest:3306 -- uvicorn gettingStarted:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    command: ./wait-for-it.sh dbtest:3306 -- python -m pytest .
     env_file: 
       - ./.env.test
     ports: 
