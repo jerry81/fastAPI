@@ -314,6 +314,10 @@ no perms on the script
 cause: the volume copy was happening after the dockerFile copy/permission setting]
 solution: remove the volume in docker-compose
 
+standard_init_linux.go:178: exec user process caused “exec format error”
+cause: bash was not set as the executor
+solution: add #!/bin/bash to the script
+
 ### defs
 
 asgi server - asynchronous server gateway interface
