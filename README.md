@@ -304,6 +304,16 @@ new database is not being used, old one still being used
 cause: docker compose using a cached volume
 solution: purge the volume and rebuild the container
 
+even with depends-on, the app runs before the db is ready
+cause: the db has not complated initialization, even after the container was fired up
+solution: need a script wait-for-it.sh to run in the app
+1.  copy the script over
+2.  ENTRYPOINT ["wait-for-it.sh", "db:3306", "--", "app_launch_commands"]
+
+no perms on the script
+cause: the volume copy was happening after the dockerFile copy/permission setting]
+solution: remove the volume in docker-compose
+
 ### defs
 
 asgi server - asynchronous server gateway interface
