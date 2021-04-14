@@ -138,6 +138,9 @@ data mapper pattern - a mapper layer between the objects and the db ensures inde
 
 uses queue system for insert/update/delete operations, flushes them as batch - fowler's "unit of work" pattern
 
+joinedload - for loading relationships - applies join to select so related rows loaded in same result set 
+usage with query: query.options(joinedload(model_to_join))
+
 ### pymysql
 
 client library for Python MySQL
