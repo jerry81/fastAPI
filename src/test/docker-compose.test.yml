@@ -3,13 +3,13 @@ version: '3.8'
 services:
   test:
     build:
-      context: ./
+      context: ../
       dockerfile: Dockerfile
     # volumes:
     #  - ./:/gettingStarted/
     command: ./wait-for-it.sh dbtest:3306 -- python -m pytest .
     env_file: 
-      - ./.env.test
+      - ../.env.test
     ports: 
       - 8000:8000
     networks:
@@ -23,7 +23,7 @@ services:
       - db_data_test:/var/lib/mysql
     restart: always
     env_file:
-      - ./.env.test
+      - ../.env.test
     # environment:
     #  MYSQL_ROOT_PASSWORD: password
     #  MYSQL_DATABASE: gs

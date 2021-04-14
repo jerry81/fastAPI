@@ -4,8 +4,8 @@ from sqlalchemy.orm import sessionmaker
 from starlette.config import Config
 
 config = Config(".env")
-USERNAME = config('MYSQL_USER', cast=str)
-PSWD = config('MYSQL_PASSWORD', cast=str)
+USERNAME = config('MYSQL_ROOT_USER', cast=str)
+PSWD = config('MYSQL_ROOT_PASSWORD', cast=str)
 DB = config('MYSQL_DATABASE', cast=str)
 print ('DB is ', DB)
 SERVICE_NAME = "db" if DB == "gs" else "dbtest"

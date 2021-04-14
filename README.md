@@ -227,6 +227,10 @@ use Stack[Int]
 
 fast ASGI server inplementation 
 
+### tasks
+
+
+
 ### testing 
 
 can use pytest directly with FastAPI
@@ -273,6 +277,10 @@ python -m pip install -r -requirements file-
 single underscore - private 
 
 double underscore aka name mangling - distinguish from global scope - class vars
+
+### orm mode
+
+pydantic's orm mode tells model to read data even if it is not a dict
 
 ### troubleshooting
 
@@ -365,5 +373,5 @@ jsonable_encoder - provided by fastAPI to convert data type to JSON dict/list
 
 testing: cleans up docker and runs the test compose 
 ``` console
-docker-compose -f docker-compose.test.yml down && docker-compose -f docker-compose.test.yml rm -v && docker-compose -f docker-compose.test.yml up -d --build && docker-compose -f docker-compose.test.yml up
+docker-compose -f ./test/docker-compose.test.yml down && docker-compose -f ./test/docker-compose.test.yml rm -v && docker-compose -f ./test/docker-compose.test.yml up -d --build && docker-compose -f ./test/docker-compose.test.yml up
 ```
