@@ -297,6 +297,17 @@ out of box function, sets value of attribute of object
 if attr is not found it is created
 used over dot notation when the attribute is a variable
 
+### __dict__
+
+built in class attribute - dict containing module's symbol table
+
+### factory boy 
+
+based on factory_bot
+fixtures replacement tool
+static, works with ORMs
+provides factory.Faker method that mocks an attribute
+
 ### troubleshooting
 
 when running pytest, ImportError while importing test module
