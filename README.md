@@ -286,6 +286,17 @@ double underscore aka name mangling - distinguish from global scope - class vars
 
 pydantic's orm mode tells model to read data even if it is not a dict
 
+### python copy package
+
+provides deepcopy method
+
+### setattr
+
+setattr(object, name, value)
+out of box function, sets value of attribute of object
+if attr is not found it is created
+used over dot notation when the attribute is a variable
+
 ### troubleshooting
 
 when running pytest, ImportError while importing test module
