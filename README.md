@@ -327,6 +327,25 @@ class UnitBase(unittest.TestCase):
 1.  loop with field in source.__dict__
 2. set destination.__dict__[field]
 
+### setting up docker testing environment using python script
+
+use libdocker library
+does alembic migration 
+manages asgi_lifespan
+
+fixtures defined:
+docker (client)
+postgres_server ?
+app
+pool ?
+client ?
+auth prefix
+create_test_user (async)
+create_test_article
+jwt_token
+authorized_client
+
+helpers - 
 
 ### troubleshooting
 
@@ -414,6 +433,53 @@ python self - refers to current instance of this class
 used to access variables in class
 
 jsonable_encoder - provided by fastAPI to convert data type to JSON dict/list
+
+higher-order functions - takes in one or more functions, returns function as a result 
+
+first-class object - can be passed around and used as arguments
+
+### higher order function examples 
+
+e.g. (js)
+const twice = f => x => f(f(x));
+
+const plusThree = i => i + 3;
+
+const g = twice(plusThree);
+
+in python
+
+def twice(x):
+    def returned(y):
+      return x(x(y))
+    return returned
+
+const plusThree = lambda i: i+ 3
+
+g = twice(plusThree)
+
+### how to make a decorator
+
+def my_dec(decorated):
+    def wrapper(decorated):
+        print('before')
+        decorated()
+        print('after)
+    return wrapper
+
+@mydec
+def hello():
+    print('hello')
+
+output: 
+before
+hello
+after
+
+equivalent to 
+
+my_dec(hello)
+    
 
 ### instructions
 
