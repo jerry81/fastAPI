@@ -308,6 +308,26 @@ fixtures replacement tool
 static, works with ORMs
 provides factory.Faker method that mocks an attribute
 
+### reflection example 
+
+class UnitBase(unittest.TestCase):
+    def assertFieldsEqual(self, destination: Any, source: Any, skip_fields=None):
+        if skip_fields is None:
+            skip_fields = []
+        if destination is None or source is None:
+            self.assertEqual(destination, source)
+            return
+
+        for field in destination.__dict__:
+            if field in source.__dict__ and field not in skip_fields:
+                source_value = source.__dict__[field]
+                dest_value = destination.__dict__[field]  # noqa
+                self.assertEqual(dest_value, source_value)
+
+1.  loop with field in source.__dict__
+2. set destination.__dict__[field]
+
+
 ### troubleshooting
 
 when running pytest, ImportError while importing test module
