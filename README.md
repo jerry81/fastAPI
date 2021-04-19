@@ -141,6 +141,10 @@ uses queue system for insert/update/delete operations, flushes them as batch - f
 joinedload - for loading relationships - applies join to select so related rows loaded in same result set 
 usage with query: query.options(joinedload(model_to_join))
 
+query controls the "Select"
+db.query((Col1, Col2)) determines which columns to select 
+-> Select Col1, Col2 from ...
+
 ### pymysql
 
 client library for Python MySQL
@@ -335,7 +339,19 @@ manages asgi_lifespan
 
 fixtures defined:
 docker (client)
-postgres_server ?
+postgres_server - using docker fixture
+  pull_image 
+  docker.create_container(
+      image=image_name,
+      name="name_of_container",
+      detach=True,
+  )
+  docker.start(container="container["id"])
+  inspects container with docker.inspect_container(container["Id"])
+  inspection.NetworkSettings.IPAddress used in connection string for db
+  pings postgres until its ready
+  then proceeds with alembic upgrade head (db:migrate)
+
 app
 pool ?
 client ?
@@ -346,6 +362,10 @@ jwt_token
 authorized_client
 
 helpers - 
+pull_image
+    calls docker.pull(img_name)
+ping_postgres(connectoionSTring)
+decorator do_with_retry - retries the call every 2 seconds until the call works
 
 ### troubleshooting
 
@@ -479,7 +499,6 @@ after
 equivalent to 
 
 my_dec(hello)
-    
 
 ### instructions
 
